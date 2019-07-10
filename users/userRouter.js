@@ -7,7 +7,6 @@ const dbPost = require("../posts/postDb.js");
 const router = express.Router();
 
 
-
 router.get('/', (req, res) => {
     dbUser
     .get()
@@ -55,18 +54,32 @@ router.delete('/:id', validateUserId, (req, res) => {
 });
 
 router.put('/:id', validateUserId, (req, res) => {
+    const user = req.body
 
+    dbUser
+    .update(req.user, user)
+    .then(user => {
+        res.status(200).json(user)
+    })
+    .catch(error => {
+        res.status(500).json(error)
+    })
 });
 
-router.post("/:id", validateUser, (req, res) => {
-
-} )
-
-router.post('/', (req, res) => {
-
+router.post('/', validateUser, (req, res) => {
+    dbUser
+    .insert(req.body)
+    .then(user => {
+        res.status(201).json(user)
+    })
+    .catch(error => {
+        res.status(500).json(err0r)
+    })
 });
 
 router.post('/:id/posts', validatePost, (req, res) => {
+    console.log(req)
+
     dbPost
     .insert(req.body)
     .then(post => {
