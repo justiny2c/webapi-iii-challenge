@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
     })
 });
 
-router.get('/:id', (req, res) => {
+router.get('/:id',validatePostId, (req, res) => {
     const id = req.params.id
 
     dbPost
