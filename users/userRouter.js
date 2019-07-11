@@ -122,7 +122,6 @@ function validateUser(req, res, next) {
 
 function validatePost(req, res, next) {
     const post = req.body
-
     const text = post.text
 
     if(!post){
